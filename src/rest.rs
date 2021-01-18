@@ -58,7 +58,7 @@ const CONF_FINAL: usize = 10; // reorgs deeper than this are considered unlikely
 struct BlockValue {
     id: String,
     height: u32,
-    version: i32,
+    version: u32,
     timestamp: u32,
     tx_count: u32,
     size: u32,
@@ -115,7 +115,7 @@ impl BlockValue {
 #[derive(Serialize, Deserialize)]
 struct TransactionValue {
     txid: Txid,
-    version: i32,
+    version: u32,
     locktime: u32,
     vin: Vec<TxInValue>,
     vout: Vec<TxOutValue>,
