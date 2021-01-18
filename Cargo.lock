@@ -163,22 +163,11 @@ dependencies = [
 
 [[package]]
 name = "bitcoin"
-version = "0.23.0"
-source = "git+https://github.com/blockstream/rust-bitcoin?rev=0.23-electrs#dd131855022c2cdd691a531c1d5c2f5ab707e4d4"
+version = "0.24.0"
+source = "git+https://github.com/rust-bitcoin/rust-bitcoin?rev=0.24.0"
 dependencies = [
  "bech32",
- "bitcoin_hashes",
- "hex 0.3.2",
  "secp256k1",
- "serde",
-]
-
-[[package]]
-name = "bitcoin_hashes"
-version = "0.7.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b375d62f341cef9cd9e77793ec8f1db3fc9ce2e4d57e982c8fe697a2c16af3b6"
-dependencies = [
  "serde",
 ]
 
@@ -459,7 +448,6 @@ version = "0.12.1"
 source = "git+https://github.com/elementsproject/rust-elements?rev=98e0c4ba1b55cd876d1d8bcff64bcf01c4c370b6#98e0c4ba1b55cd876d1d8bcff64bcf01c4c370b6"
 dependencies = [
  "bitcoin",
- "bitcoin_hashes",
  "serde",
 ]
 
@@ -1162,9 +1150,8 @@ dependencies = [
 
 [[package]]
 name = "protobuf"
-version = "2.16.2"
+version = "2.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d883f78645c21b7281d21305181aa1f4dd9e9363e7cf2566c93121552cff003e"
 
 [[package]]
 name = "quick-error"
