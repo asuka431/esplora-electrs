@@ -19,6 +19,7 @@ oldcpu = [ "rocksdb-oldcpu" ]
 
 [dependencies]
 bitcoin = { version = "0.25", features = ["use-serde"] }
+elements = { version = "0.13.0", optional = true, features = ["serde-feature"] }
 arraydeque = "0.4"
 arrayref = "0.3.6"
 base64 = "0.13.0"
@@ -58,11 +59,6 @@ tokio = { version = "=0.2.6", features = ["sync", "macros"] }
 # optional dependencies for electrum-discovery
 electrum-client = { version = "0.1.0-beta.6", optional = true }
 
-[dependencies.elements]
-optional = true
-version = "0.13.0"
-features = ["serde-feature"]
-
 [dev-dependencies]
 tempfile = "3.0"
 
@@ -70,10 +66,6 @@ tempfile = "3.0"
 lto = true
 panic = 'abort'
 codegen-units = 1
-
-[patch.crates-io.elements]
-git = "https://github.com/elementsproject/rust-elements"
-rev = "0.13.0"
 
 [patch.crates-io.electrum-client]
 git = "https://github.com/Blockstream/rust-electrum-client"
