@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::convert::{TryFrom, TryInto};
 use std::net::ToSocketAddrs;
 
-use bitcoin::hashes::Hash;
+use fujicoin::hashes::Hash;
 use electrum_client::client::{
     Client as RClient, ElectrumPlaintextStream, ElectrumProxyStream, ElectrumSslStream,
 };

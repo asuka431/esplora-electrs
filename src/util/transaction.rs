@@ -4,7 +4,7 @@ use crate::util::BlockId;
 use std::collections::HashMap;
 
 #[cfg(feature = "liquid")]
-use bitcoin::hashes::hex::FromHex;
+use fujicoin::hashes::hex::FromHex;
 
 #[cfg(feature = "liquid")]
 lazy_static! {

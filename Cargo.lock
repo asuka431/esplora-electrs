@@ -162,44 +162,44 @@ dependencies = [
 ]
 
 [[package]]
-name = "bitcoin"
+name = "fujicoin"
 version = "0.23.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6a32c9d2fa897cfbb0db45d71e3d2838666194abc4828c0f994e4b5c3bf85ba4"
 dependencies = [
  "bech32",
- "bitcoin_hashes 0.7.6",
+ "fujicoin_hashes 0.7.6",
  "hex 0.3.2",
  "secp256k1 0.17.2",
  "serde 1.0.118",
 ]
 
 [[package]]
-name = "bitcoin"
+name = "fujicoin"
 version = "0.25.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aefc9be9f17185f4ebccae6575d342063f775924d57df0000edb1880c0fb7095"
 dependencies = [
  "bech32",
- "bitcoin_hashes 0.9.4",
+ "fujicoin_hashes 0.9.4",
  "secp256k1 0.19.0",
  "serde 1.0.118",
 ]
 
 [[package]]
-name = "bitcoin"
+name = "fujicoin"
 version = "0.26.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1ec5f88a446d66e7474a3b8fa2e348320b574463fb78d799d90ba68f79f48e0e"
 dependencies = [
  "bech32",
- "bitcoin_hashes 0.9.4",
+ "fujicoin_hashes 0.9.4",
  "secp256k1 0.20.1",
  "serde 1.0.118",
 ]
 
 [[package]]
-name = "bitcoin_hashes"
+name = "fujicoin_hashes"
 version = "0.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b375d62f341cef9cd9e77793ec8f1db3fc9ce2e4d57e982c8fe697a2c16af3b6"
@@ -208,7 +208,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "bitcoin_hashes"
+name = "fujicoin_hashes"
 version = "0.9.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0aaf87b776808e26ae93289bc7d025092b6d909c193f0cdee0b3a86e7bd3c776"
@@ -442,8 +442,8 @@ dependencies = [
  "arrayref",
  "base64 0.13.0",
  "bincode",
- "bitcoin 0.25.2",
- "bitcoin 0.26.0",
+ "fujicoin 0.25.2",
+ "fujicoin 0.26.0",
  "clap",
  "crossbeam-channel",
  "dirs",
@@ -484,7 +484,7 @@ name = "electrum-client"
 version = "0.1.0-beta.6"
 source = "git+https://github.com/Blockstream/rust-electrum-client?rev=bd783aa70604fa1a0d8b29a3459326c640001354#bd783aa70604fa1a0d8b29a3459326c640001354"
 dependencies = [
- "bitcoin 0.23.0",
+ "fujicoin 0.23.0",
  "log",
  "rustls",
  "serde 1.0.118",
@@ -500,8 +500,8 @@ version = "0.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bbd3865be0d3cabe1c92022d310b747e08b6308de5d81a70c921c35701133cd8"
 dependencies = [
- "bitcoin 0.25.2",
- "bitcoin_hashes 0.9.4",
+ "fujicoin 0.25.2",
+ "fujicoin_hashes 0.9.4",
  "serde 1.0.118",
  "serde_json 0.9.10",
  "slip21",
@@ -1699,7 +1699,7 @@ version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "acff9a1a0f4d902c8184bdde5338861dd95eb1397a12c4df78fb0b6ebeed4cbe"
 dependencies = [
- "bitcoin_hashes 0.7.6",
+ "fujicoin_hashes 0.7.6",
 ]
 
 [[package]]
