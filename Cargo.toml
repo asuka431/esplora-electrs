@@ -12,7 +12,7 @@ readme = "README.md"
 edition = "2018"
 
 [features]
-default = [ "rocksdb", "fujicoin" ]
+default = [ "rocksdb" ]
 liquid = [ "elements", "elements-bitcoin" ]
 electrum-discovery = [ "electrum-client"]
 oldcpu = [ "rocksdb-oldcpu" ]
