@@ -124,7 +124,7 @@ impl Config {
             .arg(
                 Arg::with_name("daemon_rpc_addr")
                     .long("daemon-rpc-addr")
-                    .help("Fujicoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:8332 for mainnet, 127.0.0.1:18332 for testnet and 127.0.0.1:18443 for regtest)")
+                    .help("Fujicoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:3776 for mainnet, 127.0.0.1:13776 for testnet and 127.0.0.1:16776 for regtest)")
                     .takes_value(true),
             )
             .arg(
@@ -244,13 +244,13 @@ impl Config {
 
         let default_daemon_port = match network_type {
             #[cfg(not(feature = "liquid"))]
-            Network::Fujicoin => 8332,
+            Network::Fujicoin => 3776,
             #[cfg(not(feature = "liquid"))]
-            Network::Testnet => 18332,
+            Network::Testnet => 13776,
             #[cfg(not(feature = "liquid"))]
-            Network::Regtest => 18443,
+            Network::Regtest => 16776,
             #[cfg(not(feature = "liquid"))]
-            Network::Signet => 38332,
+            Network::Signet => 33776,
 
             #[cfg(feature = "liquid")]
             Network::Liquid => 7041,
@@ -274,18 +274,18 @@ impl Config {
         };
         let default_http_port = match network_type {
             #[cfg(not(feature = "liquid"))]
-            Network::Fujicoin => 3000,
+            Network::Fujicoin => 3100,
             #[cfg(not(feature = "liquid"))]
-            Network::Testnet => 3001,
+            Network::Testnet => 3101,
             #[cfg(not(feature = "liquid"))]
-            Network::Regtest => 3002,
+            Network::Regtest => 3102,
             #[cfg(not(feature = "liquid"))]
-            Network::Signet => 3003,
+            Network::Signet => 3103,
 
             #[cfg(feature = "liquid")]
-            Network::Liquid => 3000,
+            Network::Liquid => 3100,
             #[cfg(feature = "liquid")]
-            Network::LiquidRegtest => 3002,
+            Network::LiquidRegtest => 3102,
         };
         let default_monitoring_port = match network_type {
             #[cfg(not(feature = "liquid"))]
