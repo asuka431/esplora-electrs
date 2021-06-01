@@ -337,21 +337,30 @@ impl Connection {
 
     fn blockchain_transaction_get(&self, params: &[Value]) -> Result<Value> {
         let tx_hash = Txid::from(hash_from_value(params.get(0)).chain_err(|| "bad tx_hash")?);
-        let verbose = match params.get(1) {
-            Some(value) => value.as_bool().chain_err(|| "non-bool verbose value")?,
-            None => false,
+
+        let mut verbose = false;
+        match params.get(1) {
+            Some(value) => if value == 1 || value == "1" {
+                    verbose = true;
+                } else {
+                    verbose = value.as_bool().chain_err(|| "non-bool verbose value")?;
+                },
+            None => verbose = false,
         };
 
-        // FIXME: implement verbose support
         if verbose {
-            bail!("verbose transactions are currently unsupported");
+            let tx = self
+                .query
+                .lookup_raw_txn_verbose(&tx_hash)
+                .chain_err(|| "missing transaction")?;
+            Ok(json!(tx))
+        } else {
+            let tx = self
+                .query
+                .lookup_raw_txn(&tx_hash)
+                .chain_err(|| "missing transaction")?;
+            Ok(json!(hex::encode(tx)))
         }
-
-        let tx = self
-            .query
-            .lookup_raw_txn(&tx_hash)
-            .chain_err(|| "missing transaction")?;
-        Ok(json!(hex::encode(tx)))
     }
 
     fn blockchain_transaction_get_merkle(&self, params: &[Value]) -> Result<Value> {
