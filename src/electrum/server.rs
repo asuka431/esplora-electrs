@@ -338,14 +338,13 @@ impl Connection {
     fn blockchain_transaction_get(&self, params: &[Value]) -> Result<Value> {
         let tx_hash = Txid::from(hash_from_value(params.get(0)).chain_err(|| "bad tx_hash")?);
 
-        let mut verbose = false;
-        match params.get(1) {
+        let verbose = match params.get(1) {
             Some(value) => if value == 1 || value == "1" {
-                    verbose = true;
+                    true
                 } else {
-                    verbose = value.as_bool().chain_err(|| "non-bool verbose value")?;
+                    value.as_bool().chain_err(|| "non-bool verbose value")?
                 },
-            None => verbose = false,
+            None => false,
         };
 
         if verbose {
