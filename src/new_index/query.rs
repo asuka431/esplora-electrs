@@ -4,7 +4,7 @@ use std::collections::{BTreeSet, HashMap};
 use std::sync::{Arc, RwLock, RwLockReadGuard};
 use std::time::{Duration, Instant};
 
-use serde_json::{from_str, Value};
+use serde_json::{Value};
 
 use crate::chain::{Network, OutPoint, Transaction, TxOut};
 use crate::config::Config;
