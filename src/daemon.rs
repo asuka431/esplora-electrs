@@ -556,7 +556,7 @@ impl Daemon {
                         target, reply["errors"]
                     );
                     //return None;
-                    return Some((*target, -10_000f64));
+                    return Some((*target, 10_000f64));
                 }
 
                 let feerate = reply["feerate"]
@@ -566,7 +566,7 @@ impl Daemon {
                 if feerate == -1f64 {
                     warn!("not enough data to estimate fee for target {}", target);
                     //return None;
-                    return Some((*target, -10_000f64));
+                    return Some((*target, 10_000f64));
                 }
 
                 // from FJC/kB to sat/b
