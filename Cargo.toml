@@ -6,7 +6,7 @@ description = "An efficient re-implementation of Electrum Server in Rust"
 license = "MIT"
 homepage = "https://github.com/romanz/electrs"
 repository = "https://github.com/romanz/electrs"
-keywords = ["fujicoin", "electrum", "server", "index", "database"]
+keywords = ["baricoin", "electrum", "server", "index", "database"]
 documentation = "https://docs.rs/electrs/"
 readme = "README.md"
 edition = "2018"
@@ -60,7 +60,7 @@ electrum-client = { version = "0.1.0-beta.6", optional = true }
 
 # use rust-bitcoin v0.25 in liquid mode, v0.26 otherwise
 # temporary, until rust-elements is upgraded to v0.26
-fujicoin = { git = "https://github.com/fujicoin/rust-fujicoin", branch = "fujicoin-0.26.0", features = ["use-serde"] }
+baricoin = { git = "https://github.com/asuka431/rust-baricoin", branch = "baricoin-0.26.0", features = ["use-serde"] }
 elements-bitcoin = { version = "0.25.2", optional = true, package = "bitcoin", features = [ "use-serde" ] }
 
 [dev-dependencies]

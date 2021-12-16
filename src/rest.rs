@@ -9,9 +9,9 @@ use crate::util::{
 };
 
 #[cfg(not(feature = "liquid"))]
-use fujicoin::consensus::encode;
-use fujicoin::hashes::hex::{FromHex, ToHex};
-use fujicoin::hashes::Error as HashError;
+use baricoin::consensus::encode;
+use baricoin::hashes::hex::{FromHex, ToHex};
+use baricoin::hashes::Error as HashError;
 use hex::{self, FromHexError};
 use hyper::service::{make_service_fn, service_fn};
 use hyper::{Body, Method, Response, Server, StatusCode};
@@ -103,7 +103,7 @@ impl BlockValue {
             #[cfg(not(feature = "liquid"))]
             nonce: header.nonce,
             #[cfg(not(feature = "liquid"))]
-            difficulty: header.difficulty(fujicoin::Network::from(network)),
+            difficulty: header.difficulty(baricoin::Network::from(network)),
 
             #[cfg(feature = "liquid")]
             ext: Some(json!(header.ext)),
@@ -1288,16 +1288,16 @@ impl From<FromHexError> for HttpError {
         HttpError::from("Invalid hex string".to_string())
     }
 }
-impl From<fujicoin::hashes::hex::Error> for HttpError {
-    fn from(_e: fujicoin::hashes::hex::Error) -> Self {
+impl From<baricoin::hashes::hex::Error> for HttpError {
+    fn from(_e: baricoin::hashes::hex::Error) -> Self {
         //HttpError::from(e.description().to_string())
         HttpError::from("Invalid hex string".to_string())
     }
 }
-impl From<fujicoin::util::address::Error> for HttpError {
-    fn from(_e: fujicoin::util::address::Error) -> Self {
+impl From<baricoin::util::address::Error> for HttpError {
+    fn from(_e: baricoin::util::address::Error) -> Self {
         //HttpError::from(e.description().to_string())
-        HttpError::from("Invalid Fujicoin address".to_string())
+        HttpError::from("Invalid Baricoin address".to_string())
     }
 }
 impl From<errors::Error> for HttpError {

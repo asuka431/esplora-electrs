@@ -3,7 +3,7 @@ import hashlib
 import sys
 import argparse
 
-from pycoin.coins.fujicoin.networks import FujicoinTestnet, FujicoinMainnet
+from pycoin.coins.baricoin.networks import BaricoinTestnet, BaricoinMainnet
 
 import client
 
@@ -14,10 +14,10 @@ def main():
     args = parser.parse_args()
 
     if args.testnet:
-        Network = FujicoinTestnet
+        Network = BaricoinTestnet
         port = 60001
     else:
-        Network = FujicoinMainnet
+        Network = BaricoinMainnet
         port = 50001
 
     conn = client.Connection(('localhost', port))

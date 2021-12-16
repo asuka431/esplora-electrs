@@ -6,13 +6,13 @@ use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
 use base64;
-use fujicoin::hashes::hex::{FromHex, ToHex};
+use baricoin::hashes::hex::{FromHex, ToHex};
 use glob;
 use hex;
 use serde_json::{from_str, from_value, Value};
 
 #[cfg(not(feature = "liquid"))]
-use fujicoin::consensus::encode::{deserialize, serialize};
+use baricoin::consensus::encode::{deserialize, serialize};
 #[cfg(feature = "liquid")]
 use elements::encode::{deserialize, serialize};
 
@@ -111,7 +111,7 @@ pub struct BlockchainInfo {
 struct NetworkInfo {
     version: u64,
     subversion: String,
-    relayfee: f64, // in FJC/kB
+    relayfee: f64, // in BARI/kB
 }
 
 pub trait CookieGetter: Send + Sync {
@@ -292,11 +292,11 @@ impl Daemon {
             message_id: Counter::new(),
             signal: signal.clone(),
             latency: metrics.histogram_vec(
-                HistogramOpts::new("daemon_rpc", "Fujicoind RPC latency (in seconds)"),
+                HistogramOpts::new("daemon_rpc", "Baricoind RPC latency (in seconds)"),
                 &["method"],
             ),
             size: metrics.histogram_vec(
-                HistogramOpts::new("daemon_bytes", "Fujicoind RPC size (in bytes)"),
+                HistogramOpts::new("daemon_bytes", "Baricoind RPC size (in bytes)"),
                 &["method", "dir"],
             ),
         };
@@ -304,14 +304,14 @@ impl Daemon {
         info!("{:?}", network_info);
         if network_info.version < 16_00_00 {
             bail!(
-                "{} is not supported - please use fujicoind 0.16+",
+                "{} is not supported - please use baricoind 0.16+",
                 network_info.subversion,
             )
         }
         let blockchain_info = daemon.getblockchaininfo()?;
         info!("{:?}", blockchain_info);
         if blockchain_info.pruned {
-            bail!("pruned node is not supported (use '-prune=0' fujicoind flag)".to_owned())
+            bail!("pruned node is not supported (use '-prune=0' baricoind flag)".to_owned())
         }
         loop {
             let info = daemon.getblockchaininfo()?;
@@ -321,7 +321,7 @@ impl Daemon {
             }
 
             warn!(
-                "waiting for fujicoind sync to finish: {}/{} blocks, verification progress: {:.3}%",
+                "waiting for baricoind sync to finish: {}/{} blocks, verification progress: {:.3}%",
                 info.blocks,
                 info.headers,
                 info.verificationprogress * 100.0
@@ -397,7 +397,7 @@ impl Daemon {
         loop {
             match self.handle_request_batch(method, params_list) {
                 Err(Error(ErrorKind::Connection(msg), _)) => {
-                    warn!("reconnecting to fujicoind: {}", msg);
+                    warn!("reconnecting to baricoind: {}", msg);
                     self.signal.wait(Duration::from_secs(3), false)?;
                     let mut conn = self.conn.lock().unwrap();
                     *conn = conn.reconnect()?;
@@ -418,7 +418,7 @@ impl Daemon {
         self.retry_request_batch(method, params_list)
     }
 
-    // fujicoind JSONRPC API:
+    // baricoind JSONRPC API:
 
     pub fn getblockchaininfo(&self) -> Result<BlockchainInfo> {
         let info: Value = self.request("getblockchaininfo", json!([]))?;
@@ -569,7 +569,7 @@ impl Daemon {
                     return Some((*target, 10_000f64));
                 }
 
-                // from FJC/kB to sat/b
+                // from BARI/kB to sat/b
                 Some((*target, feerate * 100_000f64))
             })
             .collect())
@@ -638,7 +638,7 @@ impl Daemon {
     pub fn get_relayfee(&self) -> Result<f64> {
         let relayfee = self.getnetworkinfo()?.relayfee;
 
-        // from FJC/kB to sat/b
+        // from BARI/kB to sat/b
         Ok(relayfee * 100_000f64)
     }
 }

@@ -1,5 +1,5 @@
 #[cfg(not(feature = "liquid"))] // use regular Fujicoin data structures
-pub use fujicoin::{
+pub use baricoin::{
     blockdata::script, consensus::deserialize, util::address, Block, BlockHash, BlockHeader,
     OutPoint, Script, Transaction, TxIn, TxOut, Txid,
 };
@@ -13,8 +13,8 @@ pub use {
     },
 };
 
-use fujicoin::blockdata::constants::genesis_block;
-pub use fujicoin::network::constants::Network as BNetwork;
+use baricoin::blockdata::constants::genesis_block;
+pub use baricoin::network::constants::Network as BNetwork;
 
 #[cfg(not(feature = "liquid"))]
 pub type Value = u64;
@@ -101,20 +101,20 @@ impl Network {
 
 pub fn genesis_hash(network: Network) -> BlockHash {
     #[cfg(not(feature = "liquid"))]
-    return fujicoin_genesis_hash(network.into());
+    return baricoin_genesis_hash(network.into());
     #[cfg(feature = "liquid")]
     return liquid_genesis_hash(network);
 }
 
-pub fn fujicoin_genesis_hash(network: BNetwork) -> fujicoin::BlockHash {
+pub fn baricoin_genesis_hash(network: BNetwork) -> baricoin::BlockHash {
     lazy_static! {
-        static ref FUJICOIN_GENESIS: fujicoin::BlockHash =
+        static ref FUJICOIN_GENESIS: baricoin::BlockHash =
             genesis_block(BNetwork::Fujicoin).block_hash();
-        static ref TESTNET_GENESIS: fujicoin::BlockHash =
+        static ref TESTNET_GENESIS: baricoin::BlockHash =
             genesis_block(BNetwork::Testnet).block_hash();
-        static ref REGTEST_GENESIS: fujicoin::BlockHash =
+        static ref REGTEST_GENESIS: baricoin::BlockHash =
             genesis_block(BNetwork::Regtest).block_hash();
-        static ref SIGNET_GENESIS: fujicoin::BlockHash =
+        static ref SIGNET_GENESIS: baricoin::BlockHash =
             genesis_block(BNetwork::Signet).block_hash();
     }
     match network {

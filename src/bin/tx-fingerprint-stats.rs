@@ -9,8 +9,8 @@ fn main() {
     use std::collections::HashSet;
     use std::sync::Arc;
 
-    use fujicoin::blockdata::script::Script;
-    use fujicoin::consensus::encode::deserialize;
+    use baricoin::blockdata::script::Script;
+    use baricoin::consensus::encode::deserialize;
     use electrs::{
         chain::Transaction,
         config::Config,
@@ -43,7 +43,7 @@ fn main() {
 
     let chain = ChainQuery::new(Arc::clone(&store), Arc::clone(&daemon), &config, &metrics);
 
-    let mut indexer = Indexer::open(Arc::clone(&store), FetchFrom::Fujicoind, &config, &metrics);
+    let mut indexer = Indexer::open(Arc::clone(&store), FetchFrom::Baricoind, &config, &metrics);
     indexer.update(&daemon).unwrap();
 
     let mut iter = store.txstore_db().raw_iterator();

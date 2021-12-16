@@ -2,7 +2,7 @@ use arraydeque::{ArrayDeque, Wrapping};
 use itertools::Itertools;
 
 #[cfg(not(feature = "liquid"))]
-use fujicoin::consensus::encode::serialize;
+use baricoin::consensus::encode::serialize;
 #[cfg(feature = "liquid")]
 use elements::{encode::serialize, AssetId};
 
@@ -284,7 +284,7 @@ impl Mempool {
         let old_txids = HashSet::from_iter(self.txstore.keys().cloned());
         let to_remove: HashSet<&Txid> = old_txids.difference(&new_txids).collect();
 
-        // Download and add new transactions from fujicoind's mempool
+        // Download and add new transactions from baricoind's mempool
         let txids: Vec<&Txid> = new_txids.difference(&old_txids).collect();
         let to_add = match daemon.gettransactions(&txids) {
             Ok(txs) => txs,

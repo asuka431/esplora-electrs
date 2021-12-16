@@ -1,7 +1,7 @@
 use rayon::prelude::*;
 
 #[cfg(not(feature = "liquid"))]
-use fujicoin::consensus::encode::{deserialize, Decodable};
+use baricoin::consensus::encode::{deserialize, Decodable};
 #[cfg(feature = "liquid")]
 use elements::encode::{deserialize, Decodable};
 
@@ -19,7 +19,7 @@ use crate::util::{spawn_thread, HeaderEntry, SyncChannel};
 
 #[derive(Clone, Copy, Debug)]
 pub enum FetchFrom {
-    Fujicoind,
+    Baricoind,
     BlkFiles,
 }
 
@@ -29,7 +29,7 @@ pub fn start_fetcher(
     new_headers: Vec<HeaderEntry>,
 ) -> Result<Fetcher<Vec<BlockEntry>>> {
     let fetcher = match from {
-        FetchFrom::Fujicoind => fujicoind_fetcher,
+        FetchFrom::Baricoind => baricoind_fetcher,
         FetchFrom::BlkFiles => blkfiles_fetcher,
     };
     fetcher(daemon, new_headers)
@@ -64,7 +64,7 @@ impl<T> Fetcher<T> {
     }
 }
 
-fn fujicoind_fetcher(
+fn baricoind_fetcher(
     daemon: &Daemon,
     new_headers: Vec<HeaderEntry>,
 ) -> Result<Fetcher<Vec<BlockEntry>>> {
@@ -76,12 +76,12 @@ fn fujicoind_fetcher(
     let sender = chan.sender();
     Ok(Fetcher::from(
         chan.into_receiver(),
-        spawn_thread("fujicoind_fetcher", move || {
+        spawn_thread("baricoind_fetcher", move || {
             for entries in new_headers.chunks(100) {
                 let blockhashes: Vec<BlockHash> = entries.iter().map(|e| *e.hash()).collect();
                 let blocks = daemon
                     .getblocks(&blockhashes)
-                    .expect("failed to get blocks from fujicoind");
+                    .expect("failed to get blocks from baricoind");
                 assert_eq!(blocks.len(), entries.len());
                 let block_entries: Vec<BlockEntry> = blocks
                     .into_iter()

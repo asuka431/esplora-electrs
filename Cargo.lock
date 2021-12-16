@@ -387,7 +387,7 @@ dependencies = [
  "arrayref",
  "base64 0.13.0",
  "bincode",
- "fujicoin",
+ "baricoin",
  "clap",
  "crossbeam-channel",
  "dirs",

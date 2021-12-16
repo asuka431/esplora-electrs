@@ -1,7 +1,7 @@
-use fujicoin::hashes::hex::ToHex;
+use baricoin::hashes::hex::ToHex;
 use elements::{confidential::Asset, PeginData, PegoutData, TxIn, TxOut};
 
-use crate::chain::{fujicoin_genesis_hash, BNetwork, Network};
+use crate::chain::{baricoin_genesis_hash, BNetwork, Network};
 use crate::util::{FullHash, ScriptToAsm};
 
 pub fn get_pegin_data(txout: &TxIn, network: Network) -> Option<PeginData> {
@@ -17,7 +17,7 @@ pub fn get_pegout_data(
 ) -> Option<PegoutData> {
     txout.pegout_data().filter(|pegout| {
         pegout.asset == Asset::Explicit(*network.native_asset())
-            && pegout.genesis_hash == fujicoin_genesis_hash(parent_network)
+            && pegout.genesis_hash == baricoin_genesis_hash(parent_network)
     })
 }
 
@@ -25,7 +25,7 @@ pub fn get_pegout_data(
 #[derive(Serialize, Deserialize, Clone)]
 pub struct PegoutValue {
     pub genesis_hash: String,
-    pub scriptpubkey: fujicoin::Script,
+    pub scriptpubkey: baricoin::Script,
     pub scriptpubkey_asm: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub scriptpubkey_address: Option<String>,
@@ -36,8 +36,8 @@ impl PegoutValue {
         let pegoutdata = get_pegout_data(txout, network, parent_network)?;
 
         // pending https://github.com/ElementsProject/rust-elements/pull/69 is merged
-        let scriptpubkey = fujicoin::Script::from(pegoutdata.script_pubkey.into_bytes());
-        let address = fujicoin::Address::from_script(&scriptpubkey, parent_network);
+        let scriptpubkey = baricoin::Script::from(pegoutdata.script_pubkey.into_bytes());
+        let address = baricoin::Address::from_script(&scriptpubkey, parent_network);
 
         Some(PegoutValue {
             genesis_hash: pegoutdata.genesis_hash.to_hex(),

@@ -7,9 +7,9 @@ extern crate rocksdb;
 extern crate rocksdb_oldcpu as rocksdb;
 
 #[cfg(not(feature = "liquid"))]
-extern crate fujicoin;
+extern crate baricoin;
 #[cfg(feature = "liquid")]
-extern crate elements_fujicoin as fujicoin;
+extern crate elements_baricoin as baricoin;
 
 #[macro_use]
 extern crate clap;
